@@ -1,0 +1,3 @@
+[submodule "node-readability"]
+	path = node-readability
+	url = git://github.com/srid/node-readability.git
