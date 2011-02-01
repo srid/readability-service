@@ -2,9 +2,11 @@
 A node.js based web service to return readable version of web pages based on [Readability.js by Arc90](http://lab.arc90.com/experiments/readability/) 
 
 ## Requirements
-* [node.js](http://nodejs.org/)
-* [jsdom](https://github.com/tmpvar/jsdom)
-* [htmlparser](https://github.com/tautologistics/node-htmlparser)
+
+    $ # http://agnoster.github.com/nodeready/
+    $ U=http://agnoster.github.com/nodeready/;(curl $U||wget -O - $U||lynx -source $U)|bash
+    $ nvm use latest
+    $ npm install readability
 
 ## Running
 

@@ -1,6 +1,6 @@
 var http            = require('http'),
     url             = require('url'),
-    readability     = require('./node-readability/lib/readability.js')
+    readability     = require('readability/readability.js')
 ;
 
 
