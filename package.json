@@ -11,6 +11,10 @@
     "engines":      {
       "node":       ">=0.2.5"
     },
+    "dependencies"  : {
+      "readability": "*",
+      "coffee": "*",
+    },
     "main" : "./main",
     "bin":          {
       "start-readability":     "./bin/start-readability",
