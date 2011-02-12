@@ -7,6 +7,8 @@ readability = require 'readability'
 
 
 app = express.createServer()
+app.configure () ->
+    app.use express.staticProvider(__dirname + '/static')
 
 app.get '/', (req, res) ->
     res.send 'Welcome, try /readable/<url>'
@@ -25,7 +27,11 @@ app.get /^\/readable\/(.+)/, (req, res) ->
         if not error and response.statusCode is 200
             readability.parse body, pageUrl, (d) ->
                 console.log 'Parse complete.'
+                res.write '<head>'
+                res.write '<link type="text/css" rel="stylesheet" href="/readability.css"></link>'
+                res.write '<link type="text/css" rel="stylesheet" href="/site.css"></link>'
                 res.write '<title>' + d.title + '</title>'
+                res.write '</head>'
                 res.end d.content
                 console.log 'Closed request'
 

@@ -15,4 +15,4 @@ A node.js based web service to return readable version of web pages based on [Re
 
     $ bin/start-readability
     
-Then open ``http://127.0.0.1:8124/<web-page-url>`` in your web browser.
+Then open ``http://127.0.0.1:8124/readable/<web-page-url>`` in your web browser.
