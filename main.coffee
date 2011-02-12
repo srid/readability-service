@@ -7,11 +7,14 @@ readability = require 'readability'
 
 
 app = express.createServer()
+app.register '.coffee', require('coffeekup')
+app.set 'view engine', 'coffee'
 app.configure () ->
     app.use express.staticProvider(__dirname + '/static')
 
+
 app.get '/', (req, res) ->
-    res.send 'Welcome, try /readable/<url>'
+    res.send 'Welcome, try /readable/$url'
 
 app.get /^\/readable\/(.+)/, (req, res) ->
     pageUrl = req.params[0]
@@ -20,19 +23,14 @@ app.get /^\/readable\/(.+)/, (req, res) ->
         res.writeHead 404
         return
 
-    res.writeHead 200, {'Content-Type': 'text/html'}
+    res.writeHead 200, {'Content-Type': 'text/html; charset=utf-8'}
 
     console.log 'Page: ' + pageUrl
-    request {uri: pageUrl}, (error, response, body) ->
+    request {uri: pageUrl, encoding: 'utf-8'}, (error, response, body) ->
         if not error and response.statusCode is 200
             readability.parse body, pageUrl, (d) ->
                 console.log 'Parse complete.'
-                res.write '<head>'
-                res.write '<link type="text/css" rel="stylesheet" href="/readability.css"></link>'
-                res.write '<link type="text/css" rel="stylesheet" href="/site.css"></link>'
-                res.write '<title>' + d.title + '</title>'
-                res.write '</head>'
-                res.end d.content
+                res.render 'page', locals: {tit: d.title, content: d.content}
                 console.log 'Closed request'
 
 

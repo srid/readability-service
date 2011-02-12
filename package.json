@@ -13,7 +13,8 @@
     },
     "dependencies"  : {
       "readability": "*",
-      "coffee": "*",
+      "coffee-script": "*",
+      "coffeekup": "*",
       "request": "*",
       "express": "*",
     },
