@@ -7,7 +7,8 @@ A node.js based web service to return readable version of web pages based on [Re
     $ U=http://agnoster.github.com/nodeready/;(curl $U||wget -O - $U||lynx -source $U)|bash
     $ nvm use latest
     $ npm install readability
-    $ npm install coffee
+    $ npm install coffee-script
+    $ npm install coffeekup
     $ npm install request    
     $ npm install express
 

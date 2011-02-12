@@ -1,5 +1,3 @@
-# Run this script as `coffee main.coffee`
-
 express = require 'express'
 url = require 'url'
 request = require 'request'
@@ -31,7 +29,6 @@ app.get /^\/readable\/(.+)/, (req, res) ->
             readability.parse body, pageUrl, (d) ->
                 console.log 'Parse complete.'
                 res.render 'page', locals: {tit: d.title, content: d.content}
-                console.log 'Closed request'
 
 
 exports.run = () ->
