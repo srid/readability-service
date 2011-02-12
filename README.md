@@ -7,9 +7,10 @@ A node.js based web service to return readable version of web pages based on [Re
     $ U=http://agnoster.github.com/nodeready/;(curl $U||wget -O - $U||lynx -source $U)|bash
     $ nvm use latest
     $ npm install readability
+    $ npm install coffee
 
 ## Running
 
-    $ node main.js
+    $ coffee main.coffee
     
 Then open ``http://127.0.0.1:8124/<web-page-url>`` in your web browser.
