@@ -8,9 +8,10 @@ A node.js based web service to return readable version of web pages based on [Re
     $ nvm use latest
     $ npm install readability
     $ npm install coffee
+    $ npm install request    
 
 ## Running
 
-    $ coffee main.coffee
+    $ bin/start-readability
     
 Then open ``http://127.0.0.1:8124/<web-page-url>`` in your web browser.
