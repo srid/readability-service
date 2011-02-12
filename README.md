@@ -9,6 +9,7 @@ A node.js based web service to return readable version of web pages based on [Re
     $ npm install readability
     $ npm install coffee
     $ npm install request    
+    $ npm install express
 
 ## Running
 

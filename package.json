@@ -15,6 +15,7 @@
       "readability": "*",
       "coffee": "*",
       "request": "*",
+      "express": "*",
     },
     "main" : "./main",
     "bin":          {

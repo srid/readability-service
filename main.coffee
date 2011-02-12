@@ -1,14 +1,20 @@
 # Run this script as `coffee main.coffee`
 
-http = require 'http'
+express = require 'express'
 url = require 'url'
 request = require 'request'
 readability = require 'readability'
 
 
-server = http.createServer (req, res) ->
-    pageUrl = (req.url.substr 1)
+app = express.createServer()
+
+app.get '/', (req, res) ->
+    res.send 'Welcome, try /readable/<url>'
+
+app.get /^\/readable\/(.+)/, (req, res) ->
+    pageUrl = req.params[0]
     if pageUrl.indexOf('http') != 0  # http URLs only
+        console.log 404
         res.writeHead 404
         return
 
@@ -25,7 +31,5 @@ server = http.createServer (req, res) ->
 
 
 exports.run = () ->
-    server.listen 8124, '127.0.0.1'
+    app.listen 8124
     console.log 'Server running at http://127.0.0.1:8124/'
-
-
