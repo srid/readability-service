@@ -8,7 +8,7 @@ app = express.createServer()
 app.register '.coffee', require('coffeekup')
 app.set 'view engine', 'coffee'
 app.configure () ->
-    app.use express.staticProvider(__dirname + '/static')
+    app.use express.staticProvider("#{__dirname}/static")
 
 
 app.get '/', (req, res) ->
@@ -17,18 +17,15 @@ app.get '/', (req, res) ->
 app.get /^\/readable\/(.+)/, (req, res) ->
     pageUrl = req.params[0]
     if pageUrl.indexOf('http') != 0  # http URLs only
-        console.log 404
-        res.writeHead 404
+        res.send 404
         return
 
-    res.writeHead 200, {'Content-Type': 'text/html; charset=utf-8'}
-
-    console.log 'Page: ' + pageUrl
+    console.log "Page: #{pageUrl}"
     request {uri: pageUrl, encoding: 'utf-8'}, (error, response, body) ->
         if not error and response.statusCode is 200
             readability.parse body, pageUrl, (d) ->
-                console.log 'Parse complete.'
-                res.render 'page', locals: {tit: d.title, content: d.content}
+                console.log "Parse complete for #{d.title}"
+                res.end JSON.stringify(d)
 
 
 exports.run = () ->
