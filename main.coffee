@@ -4,6 +4,20 @@ request = require 'request'
 readability = require 'readability'
 
 
+readable = (pageUrl, cb) ->
+    # TODO: use mongodb as cache
+    # TODO: spread requests to same domain in single HTTP conn
+    console.log "Page: #{pageUrl}"
+    request {uri: pageUrl, encoding: 'utf-8'}, (error, response, body) ->
+        if not error and response.statusCode is 200
+            readability.parse body, pageUrl, (d) ->
+                console.log "Parse complete for #{d.title}"
+                cb(d)
+
+
+# Express web app
+# ###############
+
 app = express.createServer()
 app.register '.coffee', require('coffeekup')
 app.set 'view engine', 'coffee'
@@ -20,12 +34,8 @@ app.get /^\/readable\/(.+)/, (req, res) ->
         res.send 404
         return
 
-    console.log "Page: #{pageUrl}"
-    request {uri: pageUrl, encoding: 'utf-8'}, (error, response, body) ->
-        if not error and response.statusCode is 200
-            readability.parse body, pageUrl, (d) ->
-                console.log "Parse complete for #{d.title}"
-                res.end JSON.stringify(d)
+    readable pageUrl, (d) ->
+        res.end JSON.stringify(d)
 
 
 exports.run = () ->
