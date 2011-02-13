@@ -7,14 +7,16 @@ readability = require 'readability'
 readable = (pageUrl, cb) ->
     # TODO: use mongodb as cache
     # TODO: spread requests to same domain in single HTTP conn
+    #       <http://nodejs.org/docs/v0.4.0/api/all.html#http.Agent>?
     console.log "Page: #{pageUrl}"
     request {uri: pageUrl, encoding: 'utf-8'}, (error, response, body) ->
-        if not error and response.statusCode is 200
-            readability.parse body, pageUrl, (d) ->
-                console.log "Parse complete for #{d.title}"
-                cb(d)
-        else
+        if error
             throw error
+        if response.statusCode isnt 200
+            throw "non-200 response: #{response.statusCode}"
+        readability.parse body, pageUrl, (d) ->
+            console.log "Parse complete for #{d.title}"
+            cb(d)
 
 
 # Express web app
@@ -40,6 +42,6 @@ app.get /^\/readable\/(.+)/, (req, res) ->
         res.end JSON.stringify(d)
 
 
-exports.run = () ->
+@run = () ->
     app.listen 8124
     console.log 'Server running at http://127.0.0.1:8124/'
