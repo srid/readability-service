@@ -9,7 +9,7 @@
       "url":        "http://github.com/srid/readability-service/raw/master/LICENSE.txt"
     }],
     "engines":      {
-      "node":       ">=0.2.5"
+      "node":       ">=0.4.0"
     },
     "dependencies"  : {
       "readability": "*",

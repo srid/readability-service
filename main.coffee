@@ -13,6 +13,8 @@ readable = (pageUrl, cb) ->
             readability.parse body, pageUrl, (d) ->
                 console.log "Parse complete for #{d.title}"
                 cb(d)
+        else
+            throw error
 
 
 # Express web app
@@ -20,7 +22,7 @@ readable = (pageUrl, cb) ->
 
 app = express.createServer()
 app.register '.coffee', require('coffeekup')
-app.set 'view engine', 'coffee'
+app.set 'view engine', 'coffee'  # not being used yet
 app.configure () ->
     app.use express.staticProvider("#{__dirname}/static")
 

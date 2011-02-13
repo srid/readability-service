@@ -1,16 +1,15 @@
 # readability-service
-A node.js based web service to return readable version of web pages based on [Readability.js by Arc90](http://lab.arc90.com/experiments/readability/) 
+
+A node.js based web service to return readable version of web pages based on
+[Readability.js by Arc90](http://lab.arc90.com/experiments/readability/). This
+is mostly a playground for me to learn the node.js ecosystem.
 
 ## Requirements
 
-    $ # http://agnoster.github.com/nodeready/
     $ U=http://agnoster.github.com/nodeready/;(curl $U||wget -O - $U||lynx -source $U)|bash
+    $ . ~/.nvm/nvm.sh
     $ nvm use latest
-    $ npm install readability
-    $ npm install coffee-script
-    $ npm install coffeekup
-    $ npm install request    
-    $ npm install express
+    $ npm link .
 
 ## Running
 
